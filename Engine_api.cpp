@@ -213,6 +213,7 @@ enginefuncs_t meta_engfuncs =
 
 C_DLLEXPORT int GetEngineFunctions(enginefuncs_t *pengfuncsFromEngine, int *interfaceVersion) 
 {
+	LOG_CONSOLE(PLID, "GetEngineFunctions");
 	if(!pengfuncsFromEngine)
 	{
 		UTIL_LogPrintf("GetEngineFunctions called with null pengfuncsFromEngine");

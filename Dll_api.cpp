@@ -68,6 +68,7 @@ static DLL_FUNCTIONS gFunctionTable =
 
 C_DLLEXPORT int GetEntityAPI2(DLL_FUNCTIONS *pFunctionTable, int *interfaceVersion)
 {
+	LOG_CONSOLE(PLID, "GetEntityAPI2");
 	if(!pFunctionTable)
 	{
 		UTIL_LogPrintf("GetEntityAPI2 called with null pFunctionTable");

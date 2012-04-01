@@ -52,6 +52,9 @@ C_DLLEXPORT int Meta_Query(char * /*ifvers */, plugin_info_t **pPlugInfo, mutil_
 C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME /* now */, META_FUNCTIONS *pFunctionTable,
 				meta_globals_t *pMGlobals, gamedll_funcs_t *pGamedllFuncs)
 {
+	LOG_CONSOLE(PLID, "Meta_Attach");
+	LOG_MESSAGE(PLID, "log message");
+	LOG_ERROR(PLID, "log error");
 	if(!pMGlobals)
 	{
 		LOG_MESSAGE(PLID, "Meta_Attach called with null pMGlobals");
@@ -75,5 +78,6 @@ C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME /* now */, META_FUNCTIONS *pFunctionTa
 // reason	(given) why detaching (refresh, console unload, forced unload, etc)
 C_DLLEXPORT int Meta_Detach(PLUG_LOADTIME /* now */, PL_UNLOAD_REASON /* reason */) 
 {
+	LOG_CONSOLE(PLID, "Meta_Detach");
 	return true;
 }
