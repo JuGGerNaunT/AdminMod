@@ -1,6 +1,8 @@
 #include <extdll.h>
 #include <meta_api.h>
 
+#include "MyPlugin.h"
+
 // Must provide at least one of these..
 static META_FUNCTIONS gMetaFunctionTable = {
 	NULL,			// pfnGetEntityAPI				HL SDK; called before game DLL
@@ -52,9 +54,6 @@ C_DLLEXPORT int Meta_Query(char * /*ifvers */, plugin_info_t **pPlugInfo, mutil_
 C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME /* now */, META_FUNCTIONS *pFunctionTable,
 				meta_globals_t *pMGlobals, gamedll_funcs_t *pGamedllFuncs)
 {
-	LOG_CONSOLE(PLID, "Meta_Attach");
-	LOG_MESSAGE(PLID, "log message");
-	LOG_ERROR(PLID, "log error");
 	if(!pMGlobals)
 	{
 		LOG_MESSAGE(PLID, "Meta_Attach called with null pMGlobals");
@@ -69,6 +68,8 @@ C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME /* now */, META_FUNCTIONS *pFunctionTa
 	}
 	memcpy(pFunctionTable, &gMetaFunctionTable, sizeof(META_FUNCTIONS));
 	gpGamedllFuncs = pGamedllFuncs;
+
+	PluginInit();
 
 	return true;
 }

@@ -2,6 +2,8 @@
 #include <dllapi.h>
 #include <meta_api.h>
 
+#include "testing.h"
+
 static DLL_FUNCTIONS gFunctionTable = 
 {
 	NULL,					// pfnGameInit
@@ -22,7 +24,7 @@ static DLL_FUNCTIONS gFunctionTable =
 	NULL,					// pfnRestoreGlobalState
 	NULL,					// pfnResetGlobalState
 
-	NULL,					// pfnClientConnect
+	ClientConnect,					// pfnClientConnect
 	NULL,					// pfnClientDisconnect
 	NULL,					// pfnClientKill
 	NULL,					// pfnClientPutInServer
@@ -68,7 +70,6 @@ static DLL_FUNCTIONS gFunctionTable =
 
 C_DLLEXPORT int GetEntityAPI2(DLL_FUNCTIONS *pFunctionTable, int *interfaceVersion)
 {
-	LOG_CONSOLE(PLID, "GetEntityAPI2");
 	if(!pFunctionTable)
 	{
 		UTIL_LogPrintf("GetEntityAPI2 called with null pFunctionTable");
