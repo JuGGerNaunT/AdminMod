@@ -2,7 +2,7 @@
 #include <dllapi.h>
 #include <meta_api.h>
 
-#include "testing.h"
+#include "MyHandles.h"
 
 static DLL_FUNCTIONS gFunctionTable = 
 {

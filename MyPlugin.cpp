@@ -4,6 +4,8 @@
 #include <meta_api.h>
 #include <eiface.h>
 
+int players_id[32];
+
 void PluginInit()
 {
 	//Инициализация всего плагина
@@ -20,6 +22,8 @@ void AdminInfo()
 
 	if(!_stricmp(cmd, "msg"))
 		SndMessage();
+	else if(!_stricmp(cmd, "kick"))
+		KickPlayer();
 	else
 		LOG_CONSOLE(PLID, "Unrecognised command.");
 }
@@ -28,7 +32,8 @@ void ShowList()
 {
 	LOG_CONSOLE(PLID, "usage: admin <command> [<arguments>]");
 	LOG_CONSOLE(PLID, "available commands:");
-	LOG_CONSOLE(PLID, "   msg		- send ")
+	LOG_CONSOLE(PLID, "   msg		- send message to the center of screen");
+	LOG_CONSOLE(PLID, "   kick		- kick player");
 }
 
 void SndMessage()
@@ -59,4 +64,15 @@ void SndMessage()
 	str[length] = '\0';
 
 	CENTER_SAY(PLID, str);
+}
+
+void KickPlayer()
+{
+	const char *cmd;
+
+	cmd = CMD_ARGV(2);
+	CENTER_SAY(PLID, cmd);
+	edict_t *player;
+	player = g_engfuncs.pfnPEntityOfEntIndex(players_id[0]);
+	gpGamedllFuncs->dllapi_table->pfnClientDisconnect(player);
 }
