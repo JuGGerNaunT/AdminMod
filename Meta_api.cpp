@@ -1,7 +1,7 @@
 #include <extdll.h>
 #include <meta_api.h>
 
-#include "MyPlugin.h"
+#include "PluginCmds.h"
 
 // Must provide at least one of these..
 static META_FUNCTIONS gMetaFunctionTable = {

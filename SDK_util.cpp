@@ -1,3 +1,4 @@
+#pragma warning (disable: 4996)
 #include <extdll.h>
 #include <enginecallback.h>		// ALERT()
 #include <osdep.h>				// win32 vsnprintf, etc
@@ -12,7 +13,7 @@ void UTIL_LogPrintf(char *fmt, ...)
 	static char		string[1024];
 
 	va_start(argptr, fmt);
-	vsnprintf_s(string, sizeof(string), fmt, argptr);
+	vsnprintf(string, sizeof(string), fmt, argptr);
 	va_end(argptr);
 
 	// Print to server console

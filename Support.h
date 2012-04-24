@@ -5,12 +5,13 @@
 #include <ctype.h>			// isupper, tolower
 #include <support_meta.h>
 
-#ifdef MAX_CONF_LEN
-#undef MAX_CONF_LEN
-#endif
+#ifndef MAX_CONF_LEN
 #define MAX_CONF_LEN 1024
+#endif
+#define MAX_CMD_LEN 512
 
 void sup_gamedir_path(const char *path, char *fullpath);
+void sup_server_cmd(const char *command, ...);
 
 // Normalize/standardize a pathname.
 //  - For win32, this involves:

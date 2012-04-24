@@ -40,3 +40,17 @@ void sup_gamedir_path(const char *path, char *fullpath)
 	STRNCPY(fullpath, buf, sizeof(buf));
 }
 
+void sup_server_cmd(const char *command, ...)
+{
+	char cmd[MAX_CMD_LEN];
+	va_list	argptr;
+
+	va_start(argptr, command);
+	vsnprintf(cmd, sizeof(cmd), command, argptr);
+	va_end(argptr);
+
+	strncat(cmd, "\n", 1);
+
+	SERVER_COMMAND(cmd);
+}
+
