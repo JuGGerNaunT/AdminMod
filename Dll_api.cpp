@@ -24,7 +24,7 @@ static DLL_FUNCTIONS gFunctionTable =
 	NULL,					// pfnRestoreGlobalState
 	NULL,					// pfnResetGlobalState
 	ClientConnect,			// pfnClientConnect
-	NULL,					// pfnClientDisconnect
+	CLientDisconnect,		// pfnClientDisconnect
 	NULL,					// pfnClientKill
 	NULL,					// pfnClientPutInServer
 	ClientCommand,			// pfnClientCommand

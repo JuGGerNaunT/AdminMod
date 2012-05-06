@@ -3,12 +3,17 @@
 #define MAX_NAME 64
 #define NULL 0
 
-static class AdminList
+enum ACC_RIGHT {GEN, KICK, BAN, MAP};
+
+class AdminList;
+extern AdminList adminlist;
+
+class AdminList
 {
 	struct admin
 	{
 		char name[MAX_NAME];
-		bool gen, kick, ban, map;
+		bool gen, kick, ban, map, none;
 		admin *prv, *nxt;
 		admin()
 		{
@@ -25,7 +30,6 @@ static class AdminList
 	admin* FindAdmin(const char *value);
 
 public:
-	enum ACC_RIGHT {GEN, KICK, BAN, MAP};
 
 	AdminList()
 	{
@@ -36,4 +40,5 @@ public:
 	bool DeleteAdmin(const char *name);
 	bool IsAdmin(const char *name);
 	bool CheckRights(const char *name, ACC_RIGHT acc);
-} adminlist;
+	void NextAdmin(const char **name);
+};

@@ -4,6 +4,7 @@
 #include <osdep.h>
 
 #include <stdio.h>
+#include <time.h>
 
 extern mutil_funcs_t *gpMetaUtilFuncs;
 
@@ -54,3 +55,114 @@ void sup_server_cmd(const char *command, ...)
 	SERVER_COMMAND(cmd);
 }
 
+void sup_make_str(char *string, int size, char *fmt, ...)
+{
+	va_list			argptr;
+
+	va_start(argptr, fmt);
+	vsnprintf(string, size, fmt, argptr);
+	va_end(argptr);
+}
+
+void sup_convert_date(const char *time_var, char *date)
+{
+	int time_int = 0, buf = 0;
+	time_t td;
+	tm *lt = NULL;
+
+	td = time(NULL);
+	lt = localtime(&td);
+
+	time_int = sup_str_to_int(time_var);
+	if(!time_int)
+	{
+		STRNCPY(date, "-", 2);
+		return;
+	}
+
+	for(int i = 0, j = 0; i < 4; i++)
+	{
+		switch(i)
+		{
+		case 0:
+			j = lt->tm_min;
+			j += time_int % 60;
+			time_int /= 60;
+			if(j > 59)
+			{
+				j -= 59;
+				time_int++;
+			}
+
+			strncat(date, sup_int_to_str(j), 2);
+			strncat(date, ":", 1);
+			break;
+		case 1:
+			j = lt->tm_hour;
+			j += time_int % 24;
+			time_int /= 24;
+			if(j > 23)
+			{
+				j -= 23;
+				time_int++;
+			}
+
+			strncat(date, sup_int_to_str(j), 2);
+			strncat(date, " ", 1);
+			break;
+		case 2:
+			j = lt->tm_yday;
+			j += time_int % 365;
+			time_int /= 365;
+			if(j > 365)
+			{
+				j -= 365;
+				time_int++;
+			}
+
+			strncat(date, sup_int_to_str(j), 3);
+			strncat(date, ":", 1);
+			break;
+		case 3:
+			strncat(date, sup_int_to_str(lt->tm_year + time_int), 3);
+			break;
+		}
+	}
+
+	return;
+}
+
+int sup_str_to_int(const char *str)
+{
+	int data = 0;
+
+	for(USHORT i = 0; i < strlen(str); i++)
+	{
+		data *= 10;
+		data += str[i] - '0';
+	}
+
+	return data;
+}
+
+char* sup_int_to_str(int data)
+{
+	static char buf[7];
+	char str[7];
+	int i;
+
+	for(i = 0; data; i++)
+	{
+		str[i] = '0' + data % 10;
+		data /= 10;
+	}
+
+	str[i] = buf[i] = '\0';
+	for(int j = 0; i; j++)
+	{
+		i--;
+		buf[j] = str[i];
+	}
+
+	return buf;
+}

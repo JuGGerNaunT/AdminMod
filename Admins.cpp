@@ -5,6 +5,8 @@
 #include <extdll.h>
 #include <support_meta.h>
 
+AdminList adminlist;
+
 AdminList::admin* AdminList::FindAdmin(const char *value)
 {
 	admin *ptr = AdmList;
@@ -22,7 +24,7 @@ void AdminList::AddAdmin(admin *data)
 	admin *ptr = AdmList;
 	if(!ptr)
 	{
-		ptr = data;
+		AdmList = data;
 		return;
 	}
 
@@ -34,6 +36,12 @@ void AdminList::AddAdmin(admin *data)
 bool AdminList::RemoveAdmin(const char *value)
 {
 	admin *ptr = FindAdmin(value);
+	if(ptr == AdmList)
+	{
+		delete ptr;
+		AdmList = NULL;
+		return true;
+	}
 	if(ptr)
 	{
 		if(ptr->prv)
@@ -84,12 +92,14 @@ bool AdminList::IsAdmin(const char *name)
 	else return false;
 }
 
-bool AdminList::CheckRights(const char *name, AdminList::ACC_RIGHT acc)
+bool AdminList::CheckRights(const char *name, ACC_RIGHT acc)
 {
 	if(IsAdmin(name) == false)
 		return false;
 
 	admin *ptr = FindAdmin(name);
+	if(!ptr)
+		return false;
 	switch(acc)
 	{
 	case GEN:
@@ -110,4 +120,28 @@ bool AdminList::CheckRights(const char *name, AdminList::ACC_RIGHT acc)
 		break;
 	}
 	return false;
+}
+
+void AdminList::NextAdmin(const char **name)
+{
+	if(!AdmList)
+	{
+		*name = NULL;
+		return;
+	}
+
+	if( !(*name) )
+	{
+		*name = AdmList->name;
+		return;
+	}
+
+	admin *ptr = FindAdmin(*name);
+	if(!ptr || !ptr->nxt)
+	{
+		*name = NULL;
+		return;
+	}
+
+	*name = ptr->nxt->name;
 }
