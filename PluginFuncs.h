@@ -5,7 +5,9 @@
 
 void FuncKickPlayer(edict_t *pEntity, const char *name, const char *reason);
 void FuncShowMaps(edict_t *pEntity);
+char* FuncGetMap(int id);
 bool FuncValidMap(const char *map);
 bool FuncAddToBanned(const char *name, const char *time);
 bool FuncRemoveFromBanned(const char *name);
 bool FuncIsBanned(const char *name, int &minutes);
+void FuncPrintfLog(const char *str, ...);

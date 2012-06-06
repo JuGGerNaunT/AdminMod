@@ -132,6 +132,59 @@ void sup_convert_date(const char *time_var, char *date)
 	return;
 }
 
+void sup_add_symb(char *str, int num)
+{
+	if(str[num] == '9')
+	{
+		if(str[num - 1] >= '0' && str[num - 1] <= '9')
+		{
+			sup_add_symb(str, num - 1);
+			str[num] = '0';
+		}
+		else
+		{
+			str[strlen(str) - 4] = '\0';
+			strncat(str, "0.txt", 5);
+			str[num] = '1';
+		}
+	}
+	else str[num] = str[num] + 1;
+}
+
+int sup_check_numb(const char *str)
+{
+	if(str[0] != '#')
+		return -1;
+
+	return sup_str_to_int(&str[1]);
+}
+
+void sup_add_quotes(char *str)
+{
+	int length = strlen(str);
+	if(str[0] != '"' && str[length - 1] != '"')
+	{
+		str[length + 1] = '\0';
+		while(length)
+		{
+			str[length] = str[length - 1];
+			length--;
+		}
+		strncat(str, "\"", 1);
+		str[0] = '"';
+	}
+}
+
+void sup_del_quotes(char *str)
+{
+	int length = strlen(str);
+	if(str[0] == '"' && str[length - 1] == '"')
+	{
+		str[--length] = '\0';
+		STRNCPY(str, str + 1, length--);
+	}
+}
+
 int sup_str_to_int(const char *str)
 {
 	int data = 0;

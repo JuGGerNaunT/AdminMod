@@ -56,3 +56,14 @@ int PlayerList::NextPlayer(edict_t **pEntity)
 
 	return 0;
 }
+
+edict_t* PlayerList::GetEntity(int id)
+{
+	for(int i = 0; i < p_numb; i++)
+	{
+		if(PList[i].id == id)
+			return PList[i].entity;
+	}
+
+	return NULL;
+}

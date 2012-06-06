@@ -20,17 +20,38 @@ void UTIL_LogPrintf(char *fmt, ...)
 	ALERT( at_logged, "%s", string );
 }
 
-//=========================================================
-// UTIL_HudMessage - Prints a message to player's chat.
-//=========================================================
+unsigned short FixedUnsigned16(float value, float scale)
+{
+	int output = (int)(value * scale);
+
+	if (output < 0)
+		output = 0;
+	else if (output > 0xFFFF)
+		output = 0xFFFF;
+
+	return (unsigned short)output;
+}
+
+short FixedSigned16(float value, float scale)
+{
+	int output = (int)(value * scale);
+
+	if (output > 32767)
+		output = 32767;
+	else if (output < -32768)
+		output = -32768;
+
+	return (short)output;
+}
+
 void UTIL_HudMessage(edict_t *pEntity, const hudtextparms_t &textparms, char *pMessage)
 {
-	/*if (pEntity)
+	if (pEntity)
 		MESSAGE_BEGIN(MSG_ONE_UNRELIABLE, SVC_TEMPENTITY, NULL, pEntity);
 	else
 		MESSAGE_BEGIN(MSG_BROADCAST, SVC_TEMPENTITY);
 
-	WRITE_BYTE(29);
+	WRITE_BYTE(TE_TEXTMESSAGE);
 	WRITE_BYTE(textparms.channel & 0xFF);
 	WRITE_SHORT(FixedSigned16(textparms.x, (1<<13)));
 	WRITE_SHORT(FixedSigned16(textparms.y, (1<<13)));
@@ -51,23 +72,5 @@ void UTIL_HudMessage(edict_t *pEntity, const hudtextparms_t &textparms, char *pM
 		WRITE_SHORT(FixedUnsigned16(textparms.fxTime, (1<<8)));
 
 	WRITE_STRING(pMessage);
-	MESSAGE_END();*/
-}
-
-/* warning - buffer of msg must be longer than 190 chars!
-(here in AMX it is always longer) */
-void UTIL_ClientPrint(edict_t *pEntity, int msg_dest, char *msg)
-{
-	char c = msg[190];
-	msg[190] = 0;			// truncate without checking with strlen()
-
-	if (pEntity)
-		MESSAGE_BEGIN(MSG_ONE, SVC_TEMPENTITY, NULL, pEntity);
-	else
-		MESSAGE_BEGIN(MSG_BROADCAST, SVC_TEMPENTITY);
-
-	WRITE_BYTE(msg_dest);
-	WRITE_STRING(msg);
 	MESSAGE_END();
-	msg[190] = c;
 }

@@ -41,6 +41,21 @@ qboolean ClientConnect(edict_t *pEntity, const char *pszName,
 	sup_gamedir_path(path, fullpath);
 	LOG_CONSOLE(NULL, fullpath);
 
+	if(FuncIsBanned(pszName, index))
+	{
+		if(index == 0)
+		{
+			FuncKickPlayer(pEntity, pszName, "\nYour are banned forever\n");
+			RETURN_META_VALUE(MRES_IGNORED, FALSE);
+		}
+		else if(index > 0)
+		{
+			sup_make_str(line, sizeof(line), "\nYour are banned. Time left - %d\n", index);
+			FuncKickPlayer(pEntity, pszName, line);
+			RETURN_META_VALUE(MRES_IGNORED, FALSE);
+		}
+	}
+
 	file = fopen(fullpath, "r");
 	if(!file)
 	{
@@ -59,12 +74,13 @@ qboolean ClientConnect(edict_t *pEntity, const char *pszName,
 		if(strnmatch(line, "//", 2))
 			continue;
 
-		name = strtok(line, " ,\t\n");
+		name = strtok(line, "\"");
 		if(!name)
 		{
 			LOG_CONSOLE(NULL, "Line %d, bad Name", i);
 			continue;
 		}
+		sup_del_quotes(name);
 		LOG_CONSOLE(NULL, "Name %s read", name);
 		if(strcmp(pszName, name) == 0)
 		{
@@ -85,6 +101,8 @@ qboolean ClientConnect(edict_t *pEntity, const char *pszName,
 				//disconnect fake admin
 				LOG_CONSOLE(NULL, "Player pass - %s, required - %s", _pass, pas);
 				FuncKickPlayer(pEntity, pszName, "\nYour admin password doesn't valid\n");
+				fclose(file);
+				RETURN_META_VALUE(MRES_IGNORED, FALSE);
 			}
 			
 			//далее наделяем проверяем права доступа у игрока
@@ -124,6 +142,11 @@ void ClientCommand(edict_t *pEntity)
 	if(strmatch(CMD_ARGV(0), "admin"))
 	{
 		ClientAdminInfo(pEntity);
+	}
+	else if(strmatch(CMD_ARGV(0), "say"))
+	{
+		if(AdminSay(pEntity) == true)
+			RETURN_META(MRES_SUPERCEDE);
 	}
 	RETURN_META(MRES_HANDLED);
 }

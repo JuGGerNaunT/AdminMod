@@ -27,4 +27,5 @@ public:
 	void AddPlayer(edict_t *pEntity);
 	void DeletePlayer(edict_t *pEntity);
 	int NextPlayer(edict_t **pEntity);
+	edict_t* GetEntity(int id);
 };

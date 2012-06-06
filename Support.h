@@ -12,6 +12,7 @@
 #endif
 #define MAX_CMD_LEN 512
 #define DATE_LEN 18
+#define MAX_FILE_LEN 4194304
 
 extern void UTIL_HudMessage(edict_t *pEntity, const hudtextparms_t &textparms, char *pMessage);
 extern void UTIL_ClientPrint(edict_t *pEntity, int msg_dest, char *msg);
@@ -20,6 +21,11 @@ void sup_gamedir_path(const char *path, char *fullpath);
 void sup_server_cmd(const char *command, ...);
 void sup_make_str(char *string, int size, char *fmt, ...);
 void sup_convert_date(const char *time_var, char *date);
+
+void sup_add_symb(char *str, int num);
+int sup_check_numb(const char *str);
+void sup_del_quotes(char *str);
+void sup_add_quotes(char *str);
 
 int sup_str_to_int(const char *str);
 char* sup_int_to_str(int data);

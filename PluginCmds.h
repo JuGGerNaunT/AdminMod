@@ -6,6 +6,8 @@ extern int players_id[32];
 
 void PluginInit();
 
+bool AdminSay(edict_t *pEntity);
+
 void AdminInfo();
 void ClientAdminInfo(edict_t *pEntity);
 
@@ -17,7 +19,7 @@ void ClientSndMessage(edict_t *pEntity);
 void KickPlayer(edict_t *pEntity);
 void ClientKickPlayer(edict_t *pEntity);
 
-bool EnableLog();
+bool EnableLog(edict_t *pEntity = NULL);
 void ClientEnableLog(edict_t *pEntity);
 
 void ShowAdmins();
