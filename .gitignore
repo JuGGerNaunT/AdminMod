@@ -1,6 +1,4 @@
-AdminMod.def
-AdminMod.vcxproj
-AdminMod.vcxproj.filters
-AdminMod.vcxproj.user
-Release
-Debug
+AdminMod.sdf
+AdminMod.opensdf
+Release/
+Debug/
