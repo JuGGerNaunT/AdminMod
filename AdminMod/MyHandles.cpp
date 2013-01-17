@@ -126,7 +126,7 @@ qboolean ClientConnect(edict_t *pEntity, const char *pszName,
 	RETURN_META_VALUE(MRES_IGNORED, FALSE);
 }
 
-void CLientDisconnect(edict_t *pEntity)
+void ClientDisconnect(edict_t *pEntity)
 {
 	const char *name;
 	name = ENTITY_KEYVALUE(pEntity, "name");

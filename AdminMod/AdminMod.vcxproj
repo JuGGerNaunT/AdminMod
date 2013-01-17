@@ -81,24 +81,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Admins.cpp" />
-    <ClCompile Include="Dll_api.cpp" />
-    <ClCompile Include="Engine_api.cpp" />
+    <ClCompile Include="amxxmodule.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Meta_api.cpp" />
     <ClCompile Include="MyHandles.cpp" />
     <ClCompile Include="Players.cpp" />
     <ClCompile Include="PluginCmds.cpp" />
     <ClCompile Include="PluginFuncs.cpp" />
-    <ClCompile Include="SDK_util.cpp" />
     <ClCompile Include="Support.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admins.h" />
+    <ClInclude Include="amxxmodule.h" />
+    <ClInclude Include="moduleconfig.h" />
     <ClInclude Include="MyHandles.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="PluginCmds.h" />
     <ClInclude Include="PluginFuncs.h" />
     <ClInclude Include="Support.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="howto.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

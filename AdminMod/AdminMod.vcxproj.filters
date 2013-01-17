@@ -13,18 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\AmxSDK">
+      <UniqueIdentifier>{5d0ce0a8-cdfc-4253-9262-26a74a215114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AmxSDK">
+      <UniqueIdentifier>{0d099924-e490-45ef-b0ac-4ff65012a075}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dll_api.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine_api.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Meta_api.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyHandles.cpp">
@@ -39,14 +36,14 @@
     <ClCompile Include="PluginFuncs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SDK_util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Support.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Admins.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="amxxmodule.cpp">
+      <Filter>Source Files\AmxSDK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,5 +65,16 @@
     <ClInclude Include="Support.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="amxxmodule.h">
+      <Filter>Header Files\AmxSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="moduleconfig.h">
+      <Filter>Header Files\AmxSDK</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="howto.txt">
+      <Filter>Header Files\AmxSDK</Filter>
+    </Text>
   </ItemGroup>
 </Project>

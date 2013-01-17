@@ -16,7 +16,7 @@ void PluginInit()
 	//Инициализация всего плагина
 	REG_SVR_COMMAND("admin", AdminInfo);
 
-	g_hudset.a1 = 0;
+	/*g_hudset.a1 = 0;
 	g_hudset.a2 = 0;
 	g_hudset.r2 = 255;
 	g_hudset.g2 = 255;
@@ -31,7 +31,7 @@ void PluginInit()
 	g_hudset.holdTime = 6.;
 	g_hudset.fadeinTime = 0.5f;
 	g_hudset.fadeoutTime = 0.15f;
-	g_hudset.channel = -1;
+	g_hudset.channel = -1;*/
 }
 
 bool AdminSay(edict_t *pEntity)
